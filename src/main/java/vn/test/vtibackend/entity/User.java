@@ -2,29 +2,28 @@ package vn.test.vtibackend.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-
-import java.util.Date;
+import vn.test.vtibackend.common.RoleEnum;
 
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
-@Table(name ="`group`")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Group implements Serializable {
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-
     private String name;
 
-    private String creator;
+    private String email;
 
+    @Enumerated(EnumType.STRING)
+    private RoleEnum role;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date createDate;
@@ -33,6 +32,4 @@ public class Group implements Serializable {
     protected void onCreate() {
         createDate = new Date();
     }
-
-
 }

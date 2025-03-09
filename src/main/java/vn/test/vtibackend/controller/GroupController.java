@@ -14,10 +14,14 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1/groups")
 @RequiredArgsConstructor
-@Validated
+//@Validated
 public class GroupController {
     private final GroupService groupService;
 
+    @GetMapping("/exception")
+    public void exception() {
+        throw new RuntimeException("khooong bit");
+    }
     @GetMapping
     public ResponseEntity<List<Group>> search(@RequestParam(required = false) String name) {
         List<Group> groups = groupService.search(name);
@@ -26,6 +30,7 @@ public class GroupController {
     @PostMapping
     public ResponseEntity<Group> create(@RequestBody @Valid GroupReq request){
         Group group = groupService.create(request);
+        System.out.println(group);
         return ResponseEntity.ok(group);
     }
 
